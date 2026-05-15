@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Varenpril Anjay Mabar — Gym & Nutrition App</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --teal: #00d4c8;
+  --teal2: #00b4aa;
+  --teal3: #007a72;
+  --blue: #0066ff;
+  --blue2: #0044cc;
+  --bg: #080d14;
+  --bg2: #0d1520;
+  --bg3: #111d2b;
+  --card: #0f1e2e;
+  --card2: #152538;
+  --text: #e8f4ff;
+  --text2: #a0bfd8;
+  --text3: #5a7a9a;
+  --border: rgba(0,212,200,0.2);
+  --glow: 0 0 20px rgba(0,212,200,0.3);
+  --glow2: 0 0 40px rgba(0,212,200,0.15);
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --white: #ffffff;
+}
+[data-theme="light"] {
+  --bg: #f0f7ff;
+  --bg2: #e4f0fb;
+  --bg3: #d8eaf7;
+  --card: #ffffff;
+  --card2: #eaf4fd;
+  --text: #0a1a2e;
+  --text2: #2a4a6e;
+  --text3: #4a7a9e;
+  --border: rgba(0,150,140,0.25);
+  --glow: 0 0 20px rgba(0,180,170,0.2);
+  --shadow: 0 8px 32px rgba(0,100,180,0.1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Rajdhani',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background 0.4s,color 0.4s;}
+
+/* BACKGROUND GRID */
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,212,200,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,200,0.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+[data-theme="light"] body::before{background-image:linear-gradient(rgba(0,150,140,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,150,140,0.06) 1px,transparent 1px);}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--teal3);border-radius:3px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(8,13,20,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:64px;transition:background 0.4s;}
+[data-theme="light"] nav{background:rgba(240,247,255,0.85);}
+.nav-logo{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:900;color:var(--teal);letter-spacing:2px;text-transform:uppercase;line-height:1.2;}
+.nav-logo span{color:var(--text);font-size:0.65rem;display:block;letter-spacing:4px;font-weight:400;}
+.nav-links{display:flex;gap:0.2rem;align-items:center;}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:0.8rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:4px;transition:all 0.2s;cursor:pointer;}
+.nav-links a:hover{color:var(--teal);background:rgba(0,212,200,0.08);}
+.theme-toggle{background:var(--card);border:1px solid var(--border);color:var(--text);padding:6px 14px;border-radius:20px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:1px;transition:all 0.3s;display:flex;align-items:center;gap:6px;}
+.theme-toggle:hover{border-color:var(--teal);color:var(--teal);box-shadow:var(--glow);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;z-index:1;padding:80px 2rem 4rem;}
+.hero-content{max-width:800px;}
+.hero-badge{display:inline-block;background:rgba(0,212,200,0.12);border:1px solid var(--border);color:var(--teal);font-size:0.75rem;letter-spacing:4px;text-transform:uppercase;padding:6px 20px;border-radius:20px;margin-bottom:2rem;font-family:'Orbitron',sans-serif;}
+.hero h1{font-family:'Orbitron',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1.1;margin-bottom:1rem;background:linear-gradient(135deg,var(--white) 0%,var(--teal) 50%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{color:var(--text2);font-size:1.1rem;margin-bottom:2.5rem;line-height:1.7;font-weight:400;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-primary{background:linear-gradient(135deg,var(--teal),var(--blue));color:white;border:none;padding:14px 32px;border-radius:8px;font-family:'Orbitron',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 20px rgba(0,212,200,0.3);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,200,0.5);}
+.btn-secondary{background:transparent;color:var(--teal);border:1px solid var(--teal);padding:14px 32px;border-radius:8px;font-family:'Orbitron',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.3s;}
+.btn-secondary:hover{background:rgba(0,212,200,0.1);transform:translateY(-2px);}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:5rem 2rem;}
+.section-header{text-align:center;margin-bottom:3rem;}
+.section-badge{display:inline-block;background:rgba(0,212,200,0.1);border:1px solid var(--border);color:var(--teal);font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;padding:4px 16px;border-radius:20px;margin-bottom:1rem;font-family:'Orbitron',sans-serif;}
+.section-header h2{font-family:'Orbitron',sans-serif;font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;margin-bottom:0.75rem;}
+.section-header p{color:var(--text2);font-size:1rem;max-width:600px;margin:0 auto;}
+.container{max-width:1200px;margin:0 auto;}
+
+/* MUSCLE MAP SECTION */
+.muscle-section{background:var(--bg2);}
+.muscle-layout{display:grid;grid-template-columns:1fr 2fr 1fr;gap:2rem;align-items:start;max-width:1100px;margin:0 auto;}
+.muscle-list{display:flex;flex-direction:column;gap:0.5rem;}
+.muscle-btn{background:var(--card);border:1px solid var(--border);color:var(--text2);padding:10px 16px;border-radius:8px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:0.9rem;font-weight:600;letter-spacing:1px;transition:all 0.25s;text-align:left;}
+.muscle-btn:hover,.muscle-btn.active{background:rgba(0,212,200,0.1);border-color:var(--teal);color:var(--teal);box-shadow:var(--glow);}
+.muscle-btn.front-label{color:var(--teal2);font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;background:transparent;border:none;pointer-events:none;padding:12px 16px 4px;}
+
+.human-figure{position:relative;display:flex;justify-content:center;align-items:flex-start;}
+.human-svg{width:100%;max-width:360px;cursor:pointer;}
+.muscle-path{transition:fill 0.25s,filter 0.25s;cursor:pointer;}
+.muscle-path:hover,.muscle-path.active{filter:drop-shadow(0 0 8px var(--teal));}
+
+/* INFO PANEL */
+.info-panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;min-height:400px;}
+.info-panel-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:300px;color:var(--text3);text-align:center;gap:1rem;}
+.info-panel-placeholder .icon{font-size:3rem;opacity:0.4;}
+.info-panel h3{font-family:'Orbitron',sans-serif;font-size:1.1rem;color:var(--teal);margin-bottom:0.5rem;}
+.info-panel .muscle-func{color:var(--text2);font-size:0.9rem;line-height:1.7;margin-bottom:1rem;}
+.exercise-list{display:flex;flex-direction:column;gap:0.5rem;}
+.exercise-item{background:var(--card2);border:1px solid var(--border);border-radius:8px;padding:10px 14px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:space-between;font-size:0.9rem;font-weight:600;}
+.exercise-item:hover{border-color:var(--teal);color:var(--teal);background:rgba(0,212,200,0.07);}
+.exercise-item .arrow{color:var(--teal);font-size:1.1rem;}
+
+/* EXERCISE MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);z-index:2000;display:none;align-items:center;justify-content:center;padding:1rem;}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--card);border:1px solid var(--border);border-radius:20px;max-width:700px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.5),var(--glow2);}
+.modal-header{display:flex;justify-content:space-between;align-items:center;padding:1.5rem 1.5rem 0;}
+.modal-header h3{font-family:'Orbitron',sans-serif;font-size:1.2rem;color:var(--teal);}
+.modal-close{background:none;border:none;color:var(--text3);font-size:1.5rem;cursor:pointer;padding:4px;transition:color 0.2s;}
+.modal-close:hover{color:var(--text);}
+.modal-body{padding:1.5rem;}
+.modal-img{width:100%;height:200px;object-fit:cover;border-radius:12px;margin-bottom:1.5rem;background:linear-gradient(135deg,var(--card2),var(--bg3));display:flex;align-items:center;justify-content:center;font-size:4rem;}
+.modal-info{margin-bottom:1rem;}
+.modal-info h4{color:var(--teal);font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.4rem;font-family:'Orbitron',sans-serif;}
+.modal-info p{color:var(--text2);font-size:0.95rem;line-height:1.7;}
+.yt-embed{width:100%;aspect-ratio:16/9;border-radius:12px;border:1px solid var(--border);margin-top:1rem;}
+.tag{display:inline-block;background:rgba(0,212,200,0.12);border:1px solid var(--border);color:var(--teal);font-size:0.75rem;padding:3px 10px;border-radius:20px;margin:2px;}
+
+/* NUTRITION SECTION */
+.nutrition-section{background:var(--bg);}
+.nutrition-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2rem;max-width:900px;margin:0 auto;box-shadow:var(--shadow);}
+.nutrition-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:2rem;}
+.form-group{display:flex;flex-direction:column;gap:0.4rem;}
+.form-group label{font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-family:'Orbitron',sans-serif;}
+.form-group input,.form-group select{background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;font-family:'Rajdhani',sans-serif;font-size:1rem;font-weight:500;transition:border-color 0.2s,box-shadow 0.2s;outline:none;}
+.form-group input:focus,.form-group select:focus{border-color:var(--teal);box-shadow:var(--glow);}
+.form-group select option{background:var(--bg2);}
+.calc-btn{background:linear-gradient(135deg,var(--teal),var(--blue));color:white;border:none;padding:12px 32px;border-radius:8px;font-family:'Orbitron',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:2px;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 20px rgba(0,212,200,0.25);margin-bottom:2rem;}
+.calc-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,212,200,0.4);}
+.results-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;}
+.result-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center;transition:all 0.3s;}
+.result-card:hover{border-color:var(--teal);box-shadow:var(--glow);}
+.result-card .val{font-family:'Orbitron',sans-serif;font-size:1.5rem;font-weight:700;color:var(--teal);}
+.result-card .unit{font-size:0.75rem;color:var(--text3);letter-spacing:1px;}
+.result-card .label{font-size:0.85rem;font-weight:600;color:var(--text2);margin-top:4px;}
+.goal-info{background:rgba(0,212,200,0.06);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-top:1.5rem;}
+.goal-info h4{font-family:'Orbitron',sans-serif;font-size:0.9rem;color:var(--teal);margin-bottom:0.75rem;}
+.goal-info p{color:var(--text2);font-size:0.9rem;line-height:1.7;}
+.progress-bars{margin-top:1.5rem;display:flex;flex-direction:column;gap:0.75rem;}
+.prog-row{display:flex;align-items:center;gap:1rem;}
+.prog-label{width:80px;font-size:0.8rem;font-weight:600;color:var(--text3);letter-spacing:1px;text-transform:uppercase;}
+.prog-bar-bg{flex:1;height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;}
+.prog-bar-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--teal),var(--blue));transition:width 0.8s cubic-bezier(0.4,0,0.2,1);}
+.prog-val{width:60px;font-size:0.85rem;font-weight:700;color:var(--teal);text-align:right;}
+
+/* FOOD LOG */
+.food-log{margin-top:2rem;border-top:1px solid var(--border);padding-top:2rem;}
+.food-log h4{font-family:'Orbitron',sans-serif;font-size:0.9rem;color:var(--teal);margin-bottom:1rem;}
+.food-input-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr 1fr auto;gap:0.5rem;align-items:end;margin-bottom:0.5rem;}
+.food-input-row input{background:var(--bg2);border:1px solid var(--border);color:var(--text);padding:8px 10px;border-radius:6px;font-family:'Rajdhani',sans-serif;font-size:0.9rem;outline:none;width:100%;}
+.food-input-row input:focus{border-color:var(--teal);}
+.food-input-row .col-label{font-size:0.7rem;color:var(--text3);letter-spacing:1px;text-transform:uppercase;text-align:center;margin-bottom:4px;}
+.add-food-btn{background:var(--teal);color:#000;border:none;padding:8px 14px;border-radius:6px;cursor:pointer;font-weight:700;font-size:1rem;transition:all 0.2s;}
+.add-food-btn:hover{background:var(--teal2);}
+.food-table{width:100%;border-collapse:collapse;margin-top:1rem;font-size:0.85rem;}
+.food-table th{color:var(--text3);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;padding:8px;text-align:left;border-bottom:1px solid var(--border);}
+.food-table td{padding:8px;border-bottom:1px solid rgba(0,212,200,0.06);color:var(--text2);}
+.food-table tr:hover td{color:var(--text);background:rgba(0,212,200,0.04);}
+.del-btn{background:none;border:none;color:var(--text3);cursor:pointer;font-size:1rem;transition:color 0.2s;}
+.del-btn:hover{color:#ff4466;}
+.total-row td{font-weight:700;color:var(--teal);border-top:1px solid var(--border);font-family:'Orbitron',sans-serif;font-size:0.85rem;}
+
+/* NEWS SECTION */
+.news-section{background:var(--bg2);}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto;}
+.news-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.3s;cursor:pointer;}
+.news-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,0.3),var(--glow2);border-color:var(--teal);}
+.news-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;background:linear-gradient(135deg,var(--bg3),var(--card2));}
+.news-body{padding:1.2rem;}
+.news-category{font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--teal);font-family:'Orbitron',sans-serif;margin-bottom:0.5rem;}
+.news-body h3{font-size:1rem;font-weight:600;margin-bottom:0.5rem;line-height:1.4;}
+.news-body p{color:var(--text2);font-size:0.85rem;line-height:1.6;}
+.news-meta{padding:0 1.2rem 1rem;display:flex;justify-content:space-between;align-items:center;}
+.news-date{font-size:0.75rem;color:var(--text3);}
+.news-tag{background:rgba(0,212,200,0.1);border:1px solid var(--border);color:var(--teal);font-size:0.7rem;padding:2px 10px;border-radius:20px;}
+.news-filters{display:flex;gap:0.5rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap;}
+.filter-btn{background:var(--card);border:1px solid var(--border);color:var(--text2);padding:6px 18px;border-radius:20px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:0.85rem;font-weight:600;letter-spacing:1px;transition:all 0.2s;}
+.filter-btn.active,.filter-btn:hover{background:rgba(0,212,200,0.1);border-color:var(--teal);color:var(--teal);}
+
+/* FOOTER */
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:3rem 2rem;text-align:center;position:relative;z-index:1;}
+footer .logo{font-family:'Orbitron',sans-serif;font-size:1.2rem;font-weight:900;color:var(--teal);letter-spacing:3px;margin-bottom:1rem;}
+footer p{color:var(--text3);font-size:0.85rem;}
+
+/* SECTION DIVIDER */
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);margin:0;opacity:0.4;}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .muscle-layout{grid-template-columns:1fr;}
+  .food-input-row{grid-template-columns:1fr 1fr 1fr;gap:0.4rem;}
+  .nav-links{display:none;}
+  .hero h1{font-size:1.8rem;}
+}
+
+
+/* ===================== TEMPAT MUSCLE BUTTON HOVER PREVIEW ===================== */
+.muscle-btn-wrap{position:relative;}
+.muscle-preview{
+  position:absolute;
+  left:110%;top:50%;transform:translateY(-50%);
+  width:220px;
+  background:var(--card);
+  border:1px solid var(--teal);
+  border-radius:14px;
+  padding:0.9rem;
+  box-shadow:0 8px 32px rgba(0,0,0,0.5),var(--glow);
+  z-index:999;
+  pointer-events:none;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 0.2s,visibility 0.2s;
+  backdrop-filter:blur(10px);
+}
+.muscle-btn-wrap:hover .muscle-preview,
+.muscle-preview.show{opacity:1;visibility:visible;}
+.muscle-preview-img{width:100%;height:120px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;margin-bottom:0.7rem;background:linear-gradient(135deg,var(--bg3),var(--card2));overflow:hidden;}
+.muscle-preview-img svg{width:100%;height:100%;}
+.muscle-preview h4{font-family:'Orbitron',sans-serif;font-size:0.75rem;color:var(--teal);margin-bottom:0.3rem;}
+.muscle-preview p{font-size:0.78rem;color:var(--text2);line-height:1.5;}
+.muscle-preview-tag{display:inline-block;background:rgba(0,212,200,0.12);border:1px solid var(--border);color:var(--teal);font-size:0.65rem;padding:2px 8px;border-radius:10px;margin-top:0.4rem;font-family:'Orbitron',sans-serif;letter-spacing:1px;}
+/* Right side muscle buttons - preview goes to the left */
+.muscle-list.right-list .muscle-preview{left:auto;right:110%;}
+
+/* ===================== SPOTIFY SECTION ===================== */
+.playlist-section{background:var(--bg);position:relative;z-index:1;}
+.spotify-wrapper{
+  max-width:700px;margin:0 auto;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:2rem;
+  box-shadow:var(--shadow),0 0 40px rgba(30,215,96,0.08);
+  position:relative;
+  overflow:hidden;
+}
+.spotify-wrapper::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at top left,rgba(30,215,96,0.06),transparent 60%);
+  pointer-events:none;
+}
+.spotify-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;}
+.spotify-icon{width:48px;height:48px;background:linear-gradient(135deg,#1db954,#1ed760);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;box-shadow:0 4px 16px rgba(30,215,96,0.35);}
+.spotify-header-text h3{font-family:'Orbitron',sans-serif;font-size:1rem;color:var(--text);margin-bottom:0.2rem;}
+.spotify-header-text p{font-size:0.85rem;color:var(--text2);}
+.spotify-embed-wrap{border-radius:14px;overflow:hidden;border:1px solid rgba(30,215,96,0.2);}
+.spotify-link-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:1.2rem;
+  background:linear-gradient(135deg,#1db954,#1ed760);
+  color:#000;
+  border:none;padding:10px 22px;
+  border-radius:25px;
+  font-family:'Orbitron',sans-serif;font-size:0.75rem;font-weight:700;letter-spacing:1.5px;
+  cursor:pointer;text-decoration:none;
+  transition:all 0.3s;
+  box-shadow:0 4px 16px rgba(30,215,96,0.3);
+}
+.spotify-link-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(30,215,96,0.5);}
+
+/* ===================== SUPLEMEN SECTION ===================== */
+.suplemen-section{background:var(--bg2);}
+.suplemen-tabs{display:flex;gap:0.5rem;justify-content:center;margin-bottom:2.5rem;flex-wrap:wrap;}
+.suplemen-tab{background:var(--card);border:1px solid var(--border);color:var(--text2);padding:8px 20px;border-radius:25px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-size:0.9rem;font-weight:600;letter-spacing:1px;transition:all 0.25s;}
+.suplemen-tab.active,.suplemen-tab:hover{background:rgba(0,212,200,0.1);border-color:var(--teal);color:var(--teal);box-shadow:var(--glow);}
+.suplemen-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;max-width:1100px;margin:0 auto;}
+.suplemen-card{
+  background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;
+  transition:all 0.3s;position:relative;
+}
+.suplemen-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.4),var(--glow2);border-color:var(--teal);}
+.suplemen-card-header{
+  padding:1.5rem 1.5rem 1rem;
+  background:linear-gradient(135deg,var(--card2),var(--bg3));
+  border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.suplemen-card-header::before{
+  content:'';position:absolute;top:-30px;right:-30px;
+  width:100px;height:100px;
+  background:radial-gradient(circle,rgba(0,212,200,0.15),transparent);
+  border-radius:50%;
+}
+.suplemen-brand{font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--teal);font-family:'Orbitron',sans-serif;margin-bottom:0.4rem;}
+.suplemen-name{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.3rem;line-height:1.3;}
+.suplemen-type-badge{display:inline-block;background:rgba(0,212,200,0.1);border:1px solid var(--border);color:var(--teal);font-size:0.65rem;padding:3px 10px;border-radius:12px;font-family:'Orbitron',sans-serif;letter-spacing:1px;}
+.suplemen-emoji{position:absolute;top:1rem;right:1.5rem;font-size:2.5rem;opacity:0.6;}
+.suplemen-body{padding:1.5rem;}
+.suplemen-stats{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-bottom:1.2rem;}
+.stat-item{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:0.6rem 0.8rem;}
+.stat-label{font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--text3);font-family:'Orbitron',sans-serif;margin-bottom:2px;}
+.stat-value{font-family:'Orbitron',sans-serif;font-size:0.95rem;font-weight:700;color:var(--text);}
+.suplemen-review{color:var(--text2);font-size:0.88rem;line-height:1.7;margin-bottom:1.2rem;}
+.suplemen-flavors{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem;}
+.flavor-tag{background:rgba(0,102,255,0.1);border:1px solid rgba(0,102,255,0.25);color:#6699ff;font-size:0.72rem;padding:3px 10px;border-radius:12px;font-family:'Rajdhani',sans-serif;font-weight:600;}
+.suplemen-rating{display:flex;align-items:center;gap:0.75rem;padding-top:1rem;border-top:1px solid var(--border);}
+.rating-label{font-size:0.7rem;letter-spacing:2px;color:var(--text3);text-transform:uppercase;font-family:'Orbitron',sans-serif;}
+.rating-value{font-family:'Orbitron',sans-serif;font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,#ffd700,#ffaa00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.rating-stars{font-size:0.85rem;letter-spacing:1px;}
+.rating-bar{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;}
+.rating-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#ffd700,#ffaa00);transition:width 1s cubic-bezier(0.4,0,0.2,1);}
+.pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-top:1rem;}
+.pros,.cons{background:var(--bg2);border-radius:10px;padding:0.8rem;}
+.pros{border-left:3px solid #00d4c8;}
+.cons{border-left:3px solid #ff6688;}
+.pros-cons h5{font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;font-family:'Orbitron',sans-serif;margin-bottom:0.5rem;}
+.pros h5{color:var(--teal);}
+.cons h5{color:#ff6688;}
+.pros-cons li{font-size:0.82rem;color:var(--text2);line-height:1.6;list-style:none;padding-left:0.5rem;}
+.pros-cons li::before{content:'• ';}
+
+/* ===================== NEWS UPGRADED ===================== */
+.news-live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,50,50,0.12);border:1px solid rgba(255,50,50,0.3);color:#ff5555;font-size:0.7rem;letter-spacing:2px;padding:4px 14px;border-radius:20px;font-family:'Orbitron',sans-serif;margin-bottom:1rem;}
+.live-dot{width:7px;height:7px;background:#ff5555;border-radius:50%;animation:blink 1s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.news-card-link{cursor:pointer;text-decoration:none;color:inherit;display:block;}
+.news-card .news-go-btn{
+  margin:0 1.2rem 1rem;
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(0,212,200,0.08);border:1px solid var(--border);
+  color:var(--teal);font-size:0.72rem;padding:5px 14px;border-radius:20px;
+  font-family:'Orbitron',sans-serif;letter-spacing:1px;
+  transition:all 0.2s;
+}
+.news-card:hover .news-go-btn{background:rgba(0,212,200,0.18);border-color:var(--teal);}
+.news-ai-badge{font-size:0.65rem;letter-spacing:1px;color:var(--text3);display:flex;align-items:center;gap:4px;padding:0 1.2rem 1rem;}
+
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    Varenpril Anjay Mabar
+    <span>GYM & NUTRITION APP</span>
+  </div>
+  <div class="nav-links">
+    <a onclick="scrollTo2('muscle-sec')">Muscle Map</a>
+    <a onclick="scrollTo2('nutrition-sec')">Nutrition</a>
+    <a onclick="scrollTo2('suplemen-sec')">Suplemen</a>
+    <a onclick="scrollTo2('playlist-sec')">Playlist</a>
+    <a onclick="scrollTo2('news-sec')">News</a>
+  </div>
+  <button class="theme-toggle" onclick="toggleTheme()">
+    <span id="theme-icon">☀️</span>
+    <span id="theme-label">LIGHT</span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge glow-pulse">⚡ NEXT-GEN FITNESS PLATFORM</div>
+    <h1>VARENPRIL ANJAY MABAR<br>GYM & NUTRITION APP</h1>
+    <p>Track sendiri badan kau kek mn, track sendiri nutrisi kw, plan sendiri goals kau — di advanced private varenpril's nutrition program.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="scrollTo2('muscle-sec')">EXPLORE MUSCLES</button>
+      <button class="btn-secondary" onclick="scrollTo2('nutrition-sec')">NUTRITION TRACKER</button>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MUSCLE MAP -->
+<section class="muscle-section" id="muscle-sec">
+  <div class="section-header">
+    <div class="section-badge">💪 INTERACTIVE MUSCLE MAP</div>
+    <h2>Explore Your Body</h2>
+    <p>Klik bagian otot di gambar atau tombol di samping untuk ngeliat detail, fungsi, dan latihan yang cocok utk kau.</p>
+  </div>
+  <div class="muscle-layout container">
+    <!-- FRONT MUSCLES LEFT LIST -->
+    <div class="muscle-list" id="muscle-list-left">
+      <div class="muscle-btn front-label">— DEPAN —</div>
+      <div class="muscle-btn-wrap">
+        <button class="muscle-btn" onclick="selectMuscle('chest')">🔷 Dada (Pectoralis)</button>
+        <div class="muscle-preview">
+          <div class="muscle-preview-img">
+            <svg viewBox="0 0 80 70" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="cg1" cx="50%" cy="40%"><stop offset="0%" stop-color="#00d4c8" stop-opacity="0.5"/><stop offset="100%" stop-color="#00d4c8" stop-opacity="0.1"/></radialGradient></defs><path d="M10 20 Q25 15 40 17 Q55 15 70 20 L68 48 Q55 56 40 57 Q25 56 12 48Z" fill="url(#cg1)" stroke="#00d4c8" stroke-width="1.5"/><line x1="40" y1="18" x2="40" y2="56" stroke="#007a72" stroke-width="1"/><line x1="14" y1="34" x2="66" y2="34" stroke="#007a72" stroke-width="0.8"/></svg>
+          </div>
+          <h4>Pectoralis Major</h4>
+          <p>Otot dada terbesar. Target: Bench Press, Fly, Push-Up.</p>
+          <span class="muscle-preview-tag">COMPOUND</span>
+        </div>
+      </div>
+      <div class="muscle-btn-wrap">
+        <button class="muscle-btn" onclick="selectMuscle('bicep')">🔷 Bisep</button>
+        <div class="muscle-preview">
+          <div class="muscle-preview-img">
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg1" cx="50%" cy="40%"><stop offset="0%" stop-color="#00d4c8" stop-opacity="0.6"/><stop offset="100%" stop-color="#00d4c8" stop-opacity="0.1"/></radialGradient></defs><rect x="28" y="10" width="24" height="60" rx="12" fill="url(#bg1)" stroke="#00d4c8" stroke-width="1.5"/><ellipse cx="40" cy="28" rx="10" ry="14" fill="rgba(0,212,200,0.3)" stroke="#00d4c8" stroke-width="1"/></svg>
+          </div>
+          <h4>Biceps Brachii</h4>
+          <p>2 kepala otot. Target: Curl, Chin-Up.</p>
+          <span class="muscle-preview-tag">ISOLATION</span>
+        </div>
+      </div>
+      <div class="muscle-btn-wrap">
+        <button class="muscle-btn" onclick="selectMuscle('forearm')">🔷 Lengan Bawah</button>
+        <div class="muscle-preview">
+          <div class="muscle-preview-img">
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="fg1" cx="50%" cy="50%"><stop offset="0%" stop-color="#0066ff" stop-opacity="0.5"/><stop offset="100%" stop-color="#0066ff" stop-opacity="0.1"/></radialGradient></defs><rect x="25" y="12" width="30" height="56" rx="14" fill="url(#fg1)" stroke="#0066ff" stroke-width="1.5"/><line x1="40" y1="20" x2="40" y2="62" stroke="#003399" stroke-width="1"/></svg>
+          </div>
+          <h4>Forearm Flexors</h4>
+          <p>Grip strength & pergelangan. Target: Wrist Curl, Farmer's Walk.</p>
+          <span class="muscle-preview-tag">GRIP</span>
+        </div>
+      </div>
+      <div class="muscle-btn-wrap">
+        <button class="muscle-btn" onclick="selectMuscle('abs')">🔷 Perut (Abs)</button>
+        <div class="muscle-preview">
+          <div class="muscle-preview-img">
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="ag1" cx="50%" cy="50%"><stop offset="0%" stop-color="#00d4c8" stop-opacity="0.5"/><stop offset="100%" stop-color="#00d4c8" stop-opacity="0.05"/></radialGradient></defs><path d="M22 10 Q40 7 58 10 L60 68 Q40 73 20 68Z" fill="url(#ag1)" stroke="#00d4c8" stroke-width="1.5"/><line x1="40" y1="10" x2="40" y2="68" stroke="#007a72" stroke-width="1.5"/><line x1="23" y1="28" x2="57" y2="28" stroke="#007a72" stroke-width="1"/><line x1="22" y1="44" x2="58" y2="44" stroke="#007a72" stroke-width="1"/><line x1="22" y1="58" x2="58" y2="58" stroke="#007a72" stroke-width="1"/></svg>
+          </div>
+          <h4>Rectus Abdominis</h4>
+          <p>Six-pack & core stability. Target: Crunch, Plank, Leg Raise.</p>
+          <span class="musclse-preview-tag">CORE</span>
+        </div>
+      </div>
+      <div class="muscle-btn-wrap">
+        <button class="muscle-btn" onclick="selectMuscle('quad')">🔷 Paha Depan (Quads)</button>
+        <div class="muscle-preview">
+          <div class="muscle-preview-img">
+            <svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="qg1" cx="50%" cy="40%"><stop offset="0%" stop-color="#0066ff" stop-opacity="0.5"/><stop offset="100%" stop-color="#0066ff" stop-opacity="0.1"/></radialGradient></defs><rect x="14" y="10" width="22" height="68" rx="11" fill="url(#qg1)" stroke="#0066ff" stroke-width="1.5"/><rect x="44" y="10" width="22" height="68" rx="11" fill="url(#qg1)" stroke="#0066ff" stroke-width="1.5"/></svg>
+          </div>
+          <h4>Quadriceps (4 kepala)</h4>
+          <p>Otot terbesar. Target: Squat, Leg Press, Lunge.</p>
+          <span class="muscle-preview-tag">POWER</span>
+        </div>
+      </div>
+      <div class="muscle-btn-wrap">
+        <button class="muscle-btn" onclick="selectMuscle('calf')">🔷 Betis</button>
+        <div class="muscle-preview">
+          <div class="muscle-preview-img">
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="calfg" cx="50%" cy="40%"><stop offset="0%" stop-color="#00d4c8" stop-opacity="0.45"/><stop offset="100%" stop-color="#00d4c8" stop-opacity="0.08"/></radialGradient></defs><path d="M20 10 Q40 5 60 10 L56 65 Q40 72 24 65Z" fill="url(#calfg)" stroke="#00d4c8" stroke-width="1.5"/><ellipse cx="40" cy="30" rx="14" ry="18" fill="rgba(0,212,200,0.2)"/></svg>
+          </div>
+          <h4>Gastrocnemius & Soleus</h4>
+          <p>Butuh volume tinggi. Target: Calf Raise standing & seated.</p>
+          <span class="muscle-preview-tag">ENDURANCE</span>
+        </div>
+      </div>
+      <div class="muscle-btn front-label" style="margin-top:1rem;">— BELAKANG —</div>
+      <div class="muscle-btn-wrap">
+        <button class="muscle-btn" onclick="selectMuscle('back')">🔶 Punggung (Lats)</button>
+        <div class="muscle-preview">
+          <div class="muscle-preview-img">
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="bg2" cx="50%" cy="30%"><stop offset="0%" stop-color="#ff9900" stop-opacity="0.5"/><stop offset="100%" stop-color="#ff6600" stop-opacity="0.1"/></radialGradient></defs><path d="M15 15 Q40 8 65 15 L68 55 Q50 68 40 70 Q30 68 12 55Z" fill="url(#bg2)" stroke="#ff9900" stroke-width="1.5"/><path d="M15 15 Q40 25 65 15" fill="none" stroke="#cc6600" stroke-width="1.2"/></svg>
+          </div>
+          <h4>Latissimus Dorsi</h4>
+          <p>V-taper otot. Target: Pull-Up, Lat Pulldown, Row.</p>
+          <span class="muscle-preview-tag">WIDTH</span>
+        </div>
+      </div>
+      <div class="muscle-btn-wrap">
+        <button class="muscle-btn" onclick="selectMuscle('tricep')">🔶 Trisep</button>
+        <div class="muscle-preview">
+          <div class="muscle-preview-img">
+            <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="tg1" cx="50%" cy="40%"><stop offset="0%" stop-color="#ff9900" stop-opacity="0.55"/><stop offset="100%" stop-color="#ff9900" stop-opacity="0.1"/></radialGradient></defs><path d="M25 8 L55 8 L58 65 Q40 72 22 65Z" fill="url(#tg1)" stroke="#ff9900" stroke-width="1.5" rx="8"/><line x1="40" y1="8" x2="40" y2="65" stroke="#cc6600" stroke-width="1"/></svg>
+          </div>
+          <h4>Triceps Brachii (3 kepala)</h4>
+          <p>2/3 massa lengan. Target: Pushdown, Skull Crusher, Dips.</p>
+          <span class="muscle-preview-tag">MASS</span>
+        </div>
+      </div>
+      <div class="muscle-btn-wrap">
+        <button class="muscle-btn" onclick="selectMuscle('shoulder')">🔶 Bahu (Deltoid)</button>
+        <div class="muscle-preview">
+          <div class="muscle-preview-img">
+            <svg viewBox="0 0 80 50" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="sg1" cx="50%" cy="50%"><stop offset="0%" stop-color="#ff9900" stop-opacity="0.5"/><stop offset="100%" stop-color="#ff9900" stop-opacity="0.1"/></radialGradient></defs><ellipse cx="40" cy="25" rx="38" ry="18" fill="url(#sg1)" stroke="#ff9900" stroke-width="1.5"/><ellipse cx="14" cy="25" rx="10" ry="12" fill="rgba(255,153,0,0.3)" stroke="#ff9900" stroke-width="1"/><ellipse cx="66" cy="25" rx="10" ry="12" fill="rgba(255,153,0,0.3)" stroke="#ff9900" stroke-width="1"/></svg>
+          </div>
+          <h4>Deltoid (Anterior, Medial, Posterior)</h4>
+          <p>V-taper lebar. Target: OHP, Lateral Raise, Face Pull.</p>
+          <span class="muscle-preview-tag">WIDTH</span>
+        </div>
+      </div>
+      <div class="muscle-btn-wrap">
+        <button class="muscle-btn" onclick="selectMuscle('trap')">🔶 Trapezius</button>
+        <div class="muscle-preview">
+          <div class="muscle-preview-img">
+            <svg viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="trg" cx="50%" cy="30%"><stop offset="0%" stop-color="#ff6600" stop-opacity="0.6"/><stop offset="100%" stop-color="#ff6600" stop-opacity="0.1"/></radialGradient></defs><path d="M10 8 Q40 2 70 8 L68 52 Q40 58 12 52Z" fill="url(#trg)" stroke="#ff6600" stroke-width="1.5"/><path d="M10 8 L40 35 L70 8" fill="none" stroke="#cc4400" stroke-width="1.5"/></svg>
+          </div>
+          <h4>Trapezius (Upper/Mid/Lower)</h4>
+          <p>Tampilan "yoked". Target: Shrug, Deadlift, Face Pull.</p>
+          <span class="muscle-preview-tag">THICKNESS</span>
+        </div>
+      </div>
+      <div class="muscle-btn-wrap">
+        <button class="muscle-btn" onclick="selectMuscle('glute')">🔶 Bokong (Glutes)</button>
+        <div class="muscle-preview">
+          <div class="muscle-preview-img">
+            <svg viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="glg" cx="50%" cy="60%"><stop offset="0%" stop-color="#ff9900" stop-opacity="0.55"/><stop offset="100%" stop-color="#ff6600" stop-opacity="0.1"/></radialGradient></defs><path d="M8 8 Q40 2 72 8 L74 42 Q40 52 6 42Z" fill="url(#glg)" stroke="#ff9900" stroke-width="1.5"/><path d="M8 8 Q40 28 72 8" fill="none" stroke="#cc6600" stroke-width="1"/></svg>
+          </div>
+          <h4>Gluteus Maximus</h4>
+          <p>Otot terbesar tubuh. Target: Hip Thrust, Squat, Kickback.</p>
+          <span class="muscle-preview-tag">POWER</span>
+        </div>
+      </div>
+      <div class="muscle-btn-wrap">
+        <button class="muscle-btn" onclick="selectMuscle('hamstring')">🔶 Paha Belakang</button>
+        <div class="muscle-preview">
+          <div class="muscle-preview-img">
+            <svg viewBox="0 0 80 90" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="hg1" cx="50%" cy="40%"><stop offset="0%" stop-color="#ff6600" stop-opacity="0.5"/><stop offset="100%" stop-color="#ff6600" stop-opacity="0.1"/></radialGradient></defs><rect x="14" y="10" width="22" height="68" rx="12" fill="url(#hg1)" stroke="#ff6600" stroke-width="1.5"/><rect x="44" y="10" width="22" height="68" rx="12" fill="url(#hg1)" stroke="#ff6600" stroke-width="1.5"/></svg>
+          </div>
+          <h4>Hamstrings (3 otot)</h4>
+          <p>Sering kurang dilatih. Target: RDL, Leg Curl, Good Morning.</p>
+          <span class="muscle-preview-tag">POSTERIOR</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HUMAN FIGURE SVG -->
+    <div class="human-figure">
+      <svg class="human-svg" viewBox="0 0 200 480" xmlns="http://www.w3.org/2000/svg">
+        <!-- Body outline fill -->
+        <defs>
+          <radialGradient id="bodyGrad" cx="50%" cy="40%">
+            <stop offset="0%" stop-color="#1a3550"/>
+            <stop offset="100%" stop-color="#0d1f30"/>
+          </radialGradient>
+          <filter id="glow-filter">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- HEAD -->
+        <ellipse cx="100" cy="32" rx="22" ry="26" fill="#1a3550" stroke="#00d4c8" stroke-width="1" opacity="0.8"/>
+        <!-- NECK -->
+        <rect x="91" y="54" width="18" height="14" rx="4" fill="#1a3550" stroke="#00d4c8" stroke-width="0.5" opacity="0.8"/>
+
+        <!-- SHOULDERS -->
+        <ellipse id="svg-shoulder" cx="100" cy="78" rx="46" ry="14" fill="#162a3f" stroke="#334" stroke-width="0.5" class="muscle-path" onclick="selectMuscle('shoulder')" style="cursor:pointer;"/>
+        <!-- TRAP (top of shoulders) -->
+        <path id="svg-trap" d="M72 68 Q100 60 128 68 L124 80 Q100 72 76 80Z" fill="#1e3a52" class="muscle-path" onclick="selectMuscle('trap')" style="cursor:pointer;"/>
+
+        <!-- CHEST -->
+        <path id="svg-chest" d="M68 82 Q80 78 100 80 Q120 78 132 82 L130 110 Q118 118 100 119 Q82 118 70 110Z" fill="#1a3a55" stroke="#00d4c8" stroke-width="0.5" class="muscle-path" onclick="selectMuscle('chest')" style="cursor:pointer;"/>
+
+        <!-- UPPER ARMS (bicep/tricep) -->
+        <rect id="svg-bicep-l" x="45" y="82" width="20" height="56" rx="10" fill="#1a3550" class="muscle-path" onclick="selectMuscle('bicep')" style="cursor:pointer;"/>
+        <rect id="svg-bicep-r" x="135" y="82" width="20" height="56" rx="10" fill="#1a3550" class="muscle-path" onclick="selectMuscle('bicep')" style="cursor:pointer;"/>
+        <rect id="svg-tricep-l" x="41" y="84" width="8" height="52" rx="4" fill="#152d42" class="muscle-path" onclick="selectMuscle('tricep')" style="cursor:pointer;"/>
+        <rect id="svg-tricep-r" x="151" y="84" width="8" height="52" rx="4" fill="#152d42" class="muscle-path" onclick="selectMuscle('tricep')" style="cursor:pointer;"/>
+
+        <!-- FOREARMS -->
+        <rect id="svg-forearm-l" x="38" y="140" width="22" height="55" rx="10" fill="#162840" class="muscle-path" onclick="selectMuscle('forearm')" style="cursor:pointer;"/>
+        <rect id="svg-forearm-r" x="140" y="140" width="22" height="55" rx="10" fill="#162840" class="muscle-path" onclick="selectMuscle('forearm')" style="cursor:pointer;"/>
+
+        <!-- HANDS -->
+        <ellipse cx="50" cy="205" rx="13" ry="16" fill="#111e2d" stroke="#00d4c8" stroke-width="0.5" opacity="0.7"/>
+        <ellipse cx="150" cy="205" rx="13" ry="16" fill="#111e2d" stroke="#00d4c8" stroke-width="0.5" opacity="0.7"/>
+
+        <!-- LATS / BACK -->
+        <path id="svg-back" d="M68 110 Q56 118 54 145 L68 150 Q76 140 100 140 Q124 140 132 150 L146 145 Q144 118 132 110Z" fill="#1c3a55" class="muscle-path" onclick="selectMuscle('back')" style="cursor:pointer;"/>
+
+        <!-- ABS -->
+        <path id="svg-abs" d="M78 118 Q100 115 122 118 L124 180 Q100 188 76 180Z" fill="#1a3d58" class="muscle-path" onclick="selectMuscle('abs')" style="cursor:pointer;"/>
+        <!-- Abs lines -->
+        <line x1="100" y1="120" x2="100" y2="178" stroke="#0f2030" stroke-width="1.5"/>
+        <line x1="80" y1="138" x2="120" y2="138" stroke="#0f2030" stroke-width="1"/>
+        <line x1="79" y1="155" x2="121" y2="155" stroke="#0f2030" stroke-width="1"/>
+        <line x1="80" y1="170" x2="120" y2="170" stroke="#0f2030" stroke-width="1"/>
+
+        <!-- HIPS -->
+        <path d="M76 180 Q100 188 124 180 L130 200 Q100 208 70 200Z" fill="#162a3f" stroke="#334" stroke-width="0.5"/>
+
+        <!-- QUADS -->
+        <rect id="svg-quad-l" x="70" y="200" width="26" height="90" rx="12" fill="#1a3550" class="muscle-path" onclick="selectMuscle('quad')" style="cursor:pointer;"/>
+        <rect id="svg-quad-r" x="104" y="200" width="26" height="90" rx="12" fill="#1a3550" class="muscle-path" onclick="selectMuscle('quad')" style="cursor:pointer;"/>
+
+        <!-- GLUTES -->
+        <path id="svg-glute" d="M70 200 Q100 208 130 200 L132 230 Q100 240 68 230Z" fill="#1e3a52" class="muscle-path" onclick="selectMuscle('glute')" style="cursor:pointer;"/>
+
+        <!-- HAMSTRINGS -->
+        <rect id="svg-ham-l" x="68" y="232" width="28" height="60" rx="12" fill="#162840" class="muscle-path" onclick="selectMuscle('hamstring')" style="cursor:pointer;"/>
+        <rect id="svg-ham-r" x="104" y="232" width="28" height="60" rx="12" fill="#162840" class="muscle-path" onclick="selectMuscle('hamstring')" style="cursor:pointer;"/>
+
+        <!-- KNEES -->
+        <ellipse cx="84" cy="297" rx="14" ry="10" fill="#111e2d" stroke="#00d4c8" stroke-width="0.5" opacity="0.6"/>
+        <ellipse cx="116" cy="297" rx="14" ry="10" fill="#111e2d" stroke="#00d4c8" stroke-width="0.5" opacity="0.6"/>
+
+        <!-- CALVES -->
+        <rect id="svg-calf-l" x="72" y="308" width="24" height="80" rx="10" fill="#162840" class="muscle-path" onclick="selectMuscle('calf')" style="cursor:pointer;"/>
+        <rect id="svg-calf-r" x="104" y="308" width="24" height="80" rx="10" fill="#162840" class="muscle-path" onclick="selectMuscle('calf')" style="cursor:pointer;"/>
+
+        <!-- FEET -->
+        <ellipse cx="84" cy="395" rx="16" ry="10" fill="#111e2d" stroke="#00d4c8" stroke-width="0.5" opacity="0.7"/>
+        <ellipse cx="116" cy="395" rx="16" ry="10" fill="#111e2d" stroke="#00d4c8" stroke-width="0.5" opacity="0.7"/>
+
+        <!-- OUTLINE BORDERS -->
+        <ellipse cx="100" cy="32" rx="22" ry="26" fill="none" stroke="#00d4c8" stroke-width="0.8" opacity="0.5"/>
+        <path d="M68 82 Q80 78 100 80 Q120 78 132 82 L130 110 Q118 118 100 119 Q82 118 70 110Z" fill="none" stroke="#00d4c8" stroke-width="0.5" opacity="0.4"/>
+      </svg>
+    </div>
+
+    <!-- INFO PANEL -->
+    <div class="info-panel" id="info-panel">
+      <div class="info-panel-placeholder">
+        <div class="icon">👆</div>
+        <p style="color:var(--text2);font-size:0.9rem;">Klik salah satu otot pada gambar atau tombol di samping untuk melihat detail & latihan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- NUTRITION SECTION -->
+<section class="nutrition-section" id="nutrition-sec">
+  <div class="section-header">
+    <div class="section-badge">🥗 NUTRITION TRACKER</div>
+    <h2>Hitung Kebutuhan Gizimu</h2>
+    <p>Masukkan data dirimu dan pilih tujuanmu. Kami akan menghitung kebutuhan kalori & makro yang optimal untukmu.</p>
+  </div>
+  <div class="container">
+    <div class="nutrition-card">
+      <div class="nutrition-form">
+        <div class="form-group">
+          <label>Gender</label>
+          <select id="gender">
+            <option value="male">Laki-laki</option>
+            <option value="female">Perempuan</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Berat Badan (kg)</label>
+          <input type="number" id="weight" placeholder="70" min="30" max="200">
+        </div>
+        <div class="form-group">
+          <label>Tinggi Badan (cm)</label>
+          <input type="number" id="height" placeholder="170" min="100" max="250">
+        </div>
+        <div class="form-group">
+          <label>Usia (tahun)</label>
+          <input type="number" id="age" placeholder="25" min="10" max="99">
+        </div>
+        <div class="form-group">
+          <label>Aktivitas</label>
+          <select id="activity">
+            <option value="1.2">Sedentary (jarang olahraga)</option>
+            <option value="1.375">Light (1-3x/minggu)</option>
+            <option value="1.55" selected>Moderate (3-5x/minggu)</option>
+            <option value="1.725">Active (6-7x/minggu)</option>
+            <option value="1.9">Very Active (2x/hari)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tujuan</label>
+          <select id="goal">
+            <option value="bulking">Bulking (lean)</option>
+            <option value="dirty_bulking">Dirty Bulking</option>
+            <option value="cutting">Cutting</option>
+            <option value="diet">Diet / Maintain</option>
+          </select>
+        </div>
+      </div>
+      <button class="calc-btn" onclick="calculateNutrition()">⚡ HITUNG KEBUTUHANKU</button>
+
+      <div id="nutrition-results" style="display:none;">
+        <div class="results-grid" id="results-grid"></div>
+        <div class="progress-bars" id="progress-bars"></div>
+        <div class="goal-info" id="goal-info"></div>
+      </div>
+
+      <!-- FOOD LOG -->
+      <div class="food-log">
+        <h4>📋 LOG MAKANAN HARIAN</h4>
+        <div style="overflow-x:auto;">
+          <div class="food-input-row">
+            <div>
+              <div class="col-label">Nama Makanan</div>
+              <input type="text" id="food-name" placeholder="Penis pele 100g">
+            </div>
+            <div>
+              <div class="col-label">Kal</div>
+              <input type="number" id="food-cal" placeholder="130">
+            </div>
+            <div>
+              <div class="col-label">Protein (g)</div>
+              <input type="number" id="food-prot" placeholder="2.7">
+            </div>
+            <div>
+              <div class="col-label">Carbs (g)</div>
+              <input type="number" id="food-carb" placeholder="28">
+            </div>
+            <div>
+              <div class="col-label">Lemak (g)</div>
+              <input type="number" id="food-fat" placeholder="0.3">
+            </div>
+            <div>
+              <div class="col-label">Serat (g)</div>
+              <input type="number" id="food-fiber" placeholder="0.4">
+            </div>
+            <div style="display:flex;align-items:flex-end;">
+              <button class="add-food-btn" onclick="addFood()">+</button>
+            </div>
+          </div>
+        </div>
+        <table class="food-table">
+          <thead><tr>
+            <th>Makanan</th><th>Kal</th><th>Protein</th><th>Carbs</th><th>Lemak</th><th>Serat</th><th></th>
+          </tr></thead>
+          <tbody id="food-tbody"></tbody>
+          <tfoot><tr class="total-row" id="food-totals">
+            <td>TOTAL</td><td>0</td><td>0g</td><td>0g</td><td>0g</td><td>0g</td><td></td>
+          </tr></tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SUPPLEMENT EXPERIENCE SECTION -->
+<section class="suplemen-section" id="suplemen-sec">
+  <div class="section-header">
+    <div class="section-badge">💊 SUPLEMEN REVIEW</div>
+    <h2>My Supplement Experience</h2>
+    <p>Review jujur dari pengalaman pribadi menggunakan berbagai suplemen gym — whey protein & creatine pilihan Varenpril.</p>
+  </div>
+  <div class="container">
+    <div class="suplemen-tabs">
+      <button class="suplemen-tab active" onclick="filterSuplemen('all',this)">Semua</button>
+      <button class="suplemen-tab" onclick="filterSuplemen('whey',this)">🥛 Whey Protein</button>
+      <button class="suplemen-tab" onclick="filterSuplemen('creatine',this)">⚡ Creatine</button>
+    </div>
+    <div class="suplemen-cards" id="suplemen-grid"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SPOTIFY PLAYLIST SECTION -->
+<section class="playlist-section" id="playlist-sec">
+  <div class="section-header">
+    <div class="section-badge">🎵 GYM PLAYLIST</div>
+    <h2>Playlist Gym Varenpril</h2>
+    <p>Musik yang selalu menemani sesi latihan — curated untuk pump & hype di gym.</p>
+  </div>
+  <div class="container">
+    <div class="spotify-wrapper">
+      <div class="spotify-header">
+        <div class="spotify-icon">🎧</div>
+        <div class="spotify-header-text">
+          <h3>MY GYM PLAYLIST</h3>
+          <p>Varenpril's curated workout tracks on Spotify</p>
+        </div>
+      </div>
+      <div class="spotify-embed-wrap">
+        <iframe
+          src="https://open.spotify.com/embed/playlist/3krm0TrVQTXIf5ICzKSsC9?utm_source=generator&theme=0"
+          width="100%"
+          height="380"
+          frameborder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          style="display:block;"
+        ></iframe>
+      </div>
+      <a href="https://open.spotify.com/playlist/3krm0TrVQTXIf5ICzKSsC9" target="_blank" class="spotify-link-btn">
+        ▶ BUKA DI SPOTIFY
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- NEWS SECTION -->
+<section class="news-section" id="news-sec">
+  <div class="section-header">
+    <div class="section-badge">📰 GYM NEWS & PROMO</div>
+    <div class="news-live-badge"><span class="live-dot"></span> AUTO-UPDATE • AI POWERED</div>
+    <h2>Berita & Meta Gym Terkini</h2>
+    <p>Update suplemen, promo, tren latihan, dan META gym yang sedang populer sekarang. Klik berita untuk verifikasi langsung di Google.</p>
+  </div>
+  <div class="container">
+    <div class="news-filters">
+      <button class="filter-btn active" onclick="filterNews('all',this)">Semua</button>
+      <button class="filter-btn" onclick="filterNews('promo',this)">🛒 Promo</button>
+      <button class="filter-btn" onclick="filterNews('suplemen',this)">💊 Suplemen</button>
+      <button class="filter-btn" onclick="filterNews('meta',this)">🔥 META Gym</button>
+      <button class="filter-btn" onclick="filterNews('berita',this)">📰 Berita</button>
+    </div>
+    <div class="news-grid" id="news-grid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">Trusatra Private App</div>
+  <p>Gym & Nutrition App — Built with 💪 for gainers everywhere</p>
+  <p style="margin-top:0.5rem;font-size:0.75rem;">Referensi: ISSN, NSCA, WHO Dietary Guidelines, Precision Nutrition</p>
+</footer>
+
+<!-- EXERCISE MODAL -->
+<div class="modal-overlay" id="exercise-modal" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">Exercise</h3>
+      <button class="modal-close" onclick="closeExerciseModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ===================== THEME =====================
+function toggleTheme(){
+  const html=document.documentElement;
+  const isDark=html.getAttribute('data-theme')==='dark';
+  html.setAttribute('data-theme',isDark?'light':'dark');
+  document.getElementById('theme-icon').textContent=isDark?'🌙':'☀️';
+  document.getElementById('theme-label').textContent=isDark?'DARK':'LIGHT';
+}
+function scrollTo2(id){document.getElementById(id).scrollIntoView({behavior:'smooth'});}
+
+// ===================== MUSCLE DATA =====================
+const muscleData={
+  chest:{
+    name:'Dada — Pectoralis Major & Minor',
+    func:'otot dada berfungsi untuk gerakan fleksi, adduksi, dan rotasi internal lengan. Otot ini adalah salah satu otot terbesar di bagian atas tubuh dan sangat penting untuk kekuatan mendorong.',
+    exercises:[
+      {name:'Bench Press (Barbell)',img:'🏋️',yt:'https://www.youtube.com/embed/rT7DgCr-3pg',desc:'Latihan compound utama untuk dada. Berbaring di bench, turunkan barbell ke dada lalu dorong ke atas. Mengaktifkan pec major, deltoid anterior, dan trisep.',sets:'4 set × 8-12 rep',rest:'90 detik',alat:'Barbell, Bench'},
+      {name:'Dumbbell Flyes',img:'🔵',yt:'https://www.youtube.com/embed/eozdVDA78K0',desc:'Isolasi otot dada dengan gerakan memeluk. Buka lengan ke samping lalu pertemukan di atas. Sangat efektif untuk stretch otot dada.',sets:'3 set × 12-15 rep',rest:'60 detik',alat:'Dumbbell, Bench'},
+      {name:'Cable Crossover',img:'⚡',yt:'https://www.youtube.com/embed/taI4XduLpTk',desc:'Menggunakan cable machine untuk isolasi dada. Konstan tension sepanjang gerakan. Cocok untuk definisi otot dada.',sets:'3 set × 15 rep',rest:'60 detik',alat:'Cable Machine'},
+      {name:'Push-Up',img:'💪',yt:'https://www.youtube.com/embed/IODxDxX7oi4',desc:'Latihan bodyweight klasik. Efektif untuk kekuatan dada, bahu, dan trisep. Bisa divariasikan dengan wide/narrow/incline.',sets:'3 set × max rep',rest:'60 detik',alat:'Bodyweight'},
+    ]
+  },
+  bicep:{
+    name:'Bisep — Biceps Brachii',
+    func:'Bisep memiliki dua kepala (long head & short head) dan berfungsi untuk fleksi siku dan supinasi lengan bawah. Otot ini paling terlihat saat lengan ditekuk.',
+    exercises:[
+      {name:'Barbell Curl',img:'🏋️',yt:'https://www.youtube.com/embed/kwG2ipFRgfo',desc:'Latihan utama bisep dengan barbell. Berdiri tegak, angkat barbell dengan fleksi siku. Salah satu latihan bisep paling efektif.',sets:'4 set × 8-12 rep',rest:'60 detik',alat:'Barbell'},
+      {name:'Dumbbell Hammer Curl',img:'🔨',yt:'https://www.youtube.com/embed/zC3nLlEvin4',desc:'Grip netral mengaktifkan brachialis dan brachioradialis lebih baik. Tambah ketebalan lengan atas.',sets:'3 set × 10-12 rep',rest:'60 detik',alat:'Dumbbell'},
+      {name:'Concentration Curl',img:'🎯',yt:'https://www.youtube.com/embed/0AUGkch3tzc',desc:'Duduk dan tumpukan siku ke paha untuk isolasi bisep maksimal. Bagus untuk puncak (peak) bisep.',sets:'3 set × 12-15 rep',rest:'45 detik',alat:'Dumbbell'},
+      {name:'Cable Curl',img:'⚡',yt:'https://www.youtube.com/embed/cyb_1-zB9PU',desc:'Tension konstan dari cable memberikan stimulus berbeda dari free weight. Cocok sebagai finisher.',sets:'3 set × 15 rep',rest:'45 detik',alat:'Cable Machine'},
+    ]
+  },
+  tricep:{
+    name:'Trisep — Triceps Brachii',
+    func:'Trisep memiliki tiga kepala dan merupakan 2/3 massa lengan atas. Berfungsi untuk ekstensi siku. Sangat penting untuk semua gerakan mendorong.',
+    exercises:[
+      {name:'Skull Crusher',img:'💀',yt:'https://www.youtube.com/embed/d_KZxkY_0cM',desc:'Berbaring di bench, turunkan barbell/EZ bar ke dahi lalu dorong ke atas. Latihan isolasi trisep yang sangat efektif.',sets:'4 set × 10-12 rep',rest:'75 detik',alat:'EZ Bar / Barbell, Bench'},
+      {name:'Tricep Pushdown (Cable)',img:'⬇️',yt:'https://www.youtube.com/embed/vB5OHsJ3EME',desc:'Gunakan cable machine dengan rope atau bar. Dorong ke bawah sambil jaga siku tetap di sisi tubuh.',sets:'3 set × 12-15 rep',rest:'60 detik',alat:'Cable Machine'},
+      {name:'Dips',img:'⬆️',yt:'https://www.youtube.com/embed/2z8JmcrW-As',desc:'Latihan compound bodyweight. Turunkan tubuh lalu dorong naik di antara dua parallel bar. Juga melatih dada & bahu.',sets:'3 set × max rep',rest:'90 detik',alat:'Parallel Bars'},
+      {name:'Overhead Tricep Extension',img:'🙆',yt:'https://www.youtube.com/embed/YbX7Wd8jQ-Q',desc:'Angkat dumbbell/barbell di atas kepala lalu tekuk siku ke belakang. Memaksimalkan long head trisep.',sets:'3 set × 12 rep',rest:'60 detik',alat:'Dumbbell / EZ Bar'},
+    ]
+  },
+  shoulder:{
+    name:'Bahu — Deltoid (Anterior, Medial, Posterior)',
+    func:'Deltoid terdiri dari tiga bagian: anterior (depan), medial (samping), dan posterior (belakang). Berfungsi untuk abduksi, fleksi, dan ekstensi lengan. Bahu yang berkembang memberikan tampilan V-taper.',
+    exercises:[
+      {name:'Overhead Press (Military Press)',img:'🏋️',yt:'https://www.youtube.com/embed/2yjwXTZQDDI',desc:'Latihan compound utama bahu. Dorong barbell/dumbbell dari bahu ke atas kepala. Mengaktifkan semua kepala deltoid plus trisep.',sets:'4 set × 8-10 rep',rest:'90 detik',alat:'Barbell / Dumbbell'},
+      {name:'Lateral Raise',img:'↔️',yt:'https://www.youtube.com/embed/3VcKaXpzqRo',desc:'Angkat dumbbell ke samping hingga sejajar bahu. Isolasi sempurna untuk deltoid medial — memberi lebar bahu.',sets:'4 set × 12-15 rep',rest:'60 detik',alat:'Dumbbell / Cable'},
+      {name:'Face Pull',img:'🎯',yt:'https://www.youtube.com/embed/rep-qVOkqgk',desc:'Tarik cable ke arah wajah dengan siku tinggi. Melatih deltoid posterior dan rotator cuff. Penting untuk kesehatan bahu.',sets:'3 set × 15-20 rep',rest:'60 detik',alat:'Cable Machine, Rope'},
+      {name:'Arnold Press',img:'💪',yt:'https://www.youtube.com/embed/6Z15_WdXmVw',desc:'Variasi press dengan rotasi. Mulai dari posisi curl lalu rotasi keluar saat mendorong ke atas. Melatih semua tiga kepala deltoid.',sets:'3 set × 10-12 rep',rest:'75 detik',alat:'Dumbbell'},
+    ]
+  },
+  back:{
+    name:'Punggung — Latissimus Dorsi & Rhomboids',
+    func:'Latissimus dorsi (lats) adalah otot terlebar di tubuh, memberikan bentuk V-taper. Berfungsi untuk gerakan pull/menarik, ekstensi bahu, dan stabilisasi tulang belakang.',
+    exercises:[
+      {name:'Pull-Up / Chin-Up',img:'⬆️',yt:'https://www.youtube.com/embed/eGo4IYlbE5g',desc:'Raja latihan punggung. Tarik tubuh ke atas hingga dagu melebihi bar. Chin-up (underhand) lebih melatih bisep, Pull-up lebih ke lats.',sets:'4 set × max rep',rest:'90 detik',alat:'Pull-Up Bar'},
+      {name:'Barbell Row',img:'🏋️',yt:'https://www.youtube.com/embed/FWJR5Ve8bnQ',desc:'Bungkuk ke depan, tarik barbell ke arah perut. Latihan compound terbaik untuk ketebalan punggung.',sets:'4 set × 8-10 rep',rest:'90 detik',alat:'Barbell'},
+      {name:'Lat Pulldown',img:'⬇️',yt:'https://www.youtube.com/embed/CAwf7n6Luuc',desc:'Tarik bar dari atas ke bawah dagu. Mirip pull-up tapi bisa atur beban. Bagus untuk pemula dan variasi.',sets:'4 set × 10-12 rep',rest:'75 detik',alat:'Cable Machine, Lat Bar'},
+      {name:'Seated Cable Row',img:'🚣',yt:'https://www.youtube.com/embed/GZbfZ033f74',desc:'Duduk dan tarik cable ke arah perut. Melatih rhomboid, lats, dan mid-back. Penting untuk postur.',sets:'3 set × 12 rep',rest:'75 detik',alat:'Cable Machine'},
+    ]
+  },
+  abs:{
+    name:'Perut — Rectus Abdominis & Core',
+    func:'Rectus abdominis memberikan tampilan "six-pack". Berfungsi untuk fleksi tulang belakang dan stabilisasi core. Core yang kuat meningkatkan performa di semua latihan compound.',
+    exercises:[
+      {name:'Crunches',img:'🔄',yt:'https://www.youtube.com/embed/Xyd_fa5zoEU',desc:'Latihan klasik abs. Berbaring, tekuk lutut, angkat bahu dari lantai dengan kontraksi abs. Fokus pada kontraksi, bukan momentum.',sets:'4 set × 20 rep',rest:'45 detik',alat:'Bodyweight / Mat'},
+      {name:'Plank',img:'🪨',yt:'https://www.youtube.com/embed/ASdvN_XEl_c',desc:'Tahan posisi push-up statis. Melatih seluruh core secara isometrik. Sangat efektif untuk kekuatan dan endurance core.',sets:'3 set × 60 detik',rest:'30 detik',alat:'Bodyweight / Mat'},
+      {name:'Hanging Leg Raise',img:'🦵',yt:'https://www.youtube.com/embed/hdng3Nm1x_E',desc:'Gantung di pull-up bar, angkat kaki hingga sejajar atau lebih tinggi. Melatih lower abs dan hip flexor.',sets:'3 set × 15 rep',rest:'60 detik',alat:'Pull-Up Bar'},
+      {name:'Cable Crunch',img:'⚡',yt:'https://www.youtube.com/embed/2fbujeH3F0E',desc:'Berlutut di depan cable machine, tarik rope ke bawah dengan kontraksi abs. Bisa menambah beban progresif.',sets:'4 set × 15-20 rep',rest:'60 detik',alat:'Cable Machine, Rope'},
+    ]
+  },
+  forearm:{
+    name:'Lengan Bawah — Forearm Flexors & Extensors',
+    func:'Otot lengan bawah mengontrol gerakan pergelangan tangan dan grip strength. Grip yang kuat sangat penting untuk semua latihan pulling dan pressing.',
+    exercises:[
+      {name:'Wrist Curl',img:'🔄',yt:'https://www.youtube.com/embed/dO2tRvD12-g',desc:'Duduk, tumpukan lengan bawah di paha, curl pergelangan tangan ke atas. Melatih flexor lengan bawah.',sets:'3 set × 15-20 rep',rest:'45 detik',alat:'Barbell / Dumbbell'},
+      {name:'Reverse Curl',img:'↩️',yt:'https://www.youtube.com/embed/nRgxYX2Ve9w',desc:'Curl dengan grip overhand (pronated). Melatih brachioradialis dan ekstensor lengan bawah. Menambah ketebalan lengan.',sets:'3 set × 12-15 rep',rest:'45 detik',alat:'Barbell / Dumbbell'},
+      {name:'Farmer\'s Walk',img:'🧺',yt:'https://www.youtube.com/embed/Fkzk_RqlYig',desc:'Bawa beban berat di kedua tangan sambil berjalan. Melatih grip strength, core, dan kondisi kardio secara bersamaan.',sets:'3 set × 30 meter',rest:'60 detik',alat:'Dumbbell / Kettlebell / Trap Bar'},
+    ]
+  },
+  quad:{
+    name:'Paha Depan — Quadriceps',
+    func:'Quadriceps terdiri dari 4 kepala otot dan merupakan otot terbesar di tubuh. Berfungsi untuk ekstensi lutut dan fleksi pinggul. Sangat penting untuk lompatan, squat, dan berlari.',
+    exercises:[
+      {name:'Barbell Squat',img:'🏋️',yt:'https://www.youtube.com/embed/ultWZbUMPL8',desc:'Latihan compound terbaik untuk kaki. Barbell di punggung, turun hingga paha sejajar lantai lalu naik. Melatih quads, hamstring, glutes, dan core.',sets:'5 set × 5-8 rep',rest:'2-3 menit',alat:'Barbell, Squat Rack'},
+      {name:'Leg Press',img:'⬆️',yt:'https://www.youtube.com/embed/IZxyjW7MPJQ',desc:'Duduk di mesin, dorong platform ke atas. Lebih aman untuk punggung bawah. Bisa variasi kaki untuk fokus otot berbeda.',sets:'4 set × 10-12 rep',rest:'90 detik',alat:'Leg Press Machine'},
+      {name:'Leg Extension',img:'🦵',yt:'https://www.youtube.com/embed/YyvSfVjQeL0',desc:'Duduk di mesin, angkat beban dengan ekstensi lutut. Isolasi murni untuk quadriceps. Cocok sebagai finisher atau pump.',sets:'3 set × 15 rep',rest:'60 detik',alat:'Leg Extension Machine'},
+      {name:'Lunges',img:'🚶',yt:'https://www.youtube.com/embed/QOVaHwm-Q6U',desc:'Langkah ke depan dengan lutut mendekati lantai. Latihan unilateral bagus untuk keseimbangan dan imbalance otot.',sets:'3 set × 12 rep/kaki',rest:'75 detik',alat:'Bodyweight / Dumbbell / Barbell'},
+    ]
+  },
+  hamstring:{
+    name:'Paha Belakang — Hamstrings',
+    func:'Hamstrings terdiri dari 3 otot: biceps femoris, semitendinosus, semimembranosus. Berfungsi untuk fleksi lutut dan ekstensi pinggul. Sering kurang dilatih dibanding quads.',
+    exercises:[
+      {name:'Romanian Deadlift (RDL)',img:'🏋️',yt:'https://www.youtube.com/embed/JCXUYuzwNrM',desc:'Berdiri dengan barbell, bungkuk ke depan dengan kaki lurus (sedikit bengkok). Merasakan stretch hamstring lalu kembali tegak. Latihan utama hamstring.',sets:'4 set × 8-10 rep',rest:'90 detik',alat:'Barbell / Dumbbell'},
+      {name:'Leg Curl',img:'🔄',yt:'https://www.youtube.com/embed/1Tq3QdYUuHs',desc:'Berbaring di mesin leg curl, angkat beban dengan menekuk lutut. Isolasi hamstring yang efektif.',sets:'3 set × 12-15 rep',rest:'60 detik',alat:'Leg Curl Machine'},
+      {name:'Good Morning',img:'🌅',yt:'https://www.youtube.com/embed/YA-h3n9L4YU',desc:'Barbell di punggung atas, bungkuk ke depan seperti memberi salam pagi. Melatih hamstring dan lower back.',sets:'3 set × 10 rep',rest:'90 detik',alat:'Barbell'},
+    ]
+  },
+  glute:{
+    name:'Bokong — Gluteus Maximus, Medius & Minimus',
+    func:'Glutes adalah otot terbesar di tubuh. Berfungsi untuk ekstensi pinggul, abduksi, dan rotasi. Glutes yang kuat = postur lebih baik, power lebih tinggi, dan risiko cedera lutut berkurang.',
+    exercises:[
+      {name:'Hip Thrust',img:'🍑',yt:'https://www.youtube.com/embed/xDmFkJxPzeM',desc:'Sandaran bahu di bench, barbell di atas pinggul, dorong pinggul ke atas. Latihan terbaik untuk glutes berdasarkan EMG research.',sets:'4 set × 10-12 rep',rest:'90 detik',alat:'Barbell, Bench'},
+      {name:'Glute Bridge',img:'🌉',yt:'https://www.youtube.com/embed/wPM8icPu6H8',desc:'Berbaring, tekuk lutut, dorong pinggul ke atas. Versi lebih mudah dari hip thrust. Bisa tambah beban dengan dumbbell.',sets:'3 set × 15-20 rep',rest:'60 detik',alat:'Bodyweight / Dumbbell'},
+      {name:'Cable Kickback',img:'⬅️',yt:'https://www.youtube.com/embed/RMFCOSi5nAk',desc:'Berdiri di cable machine, pasang strap di pergelangan kaki, tendang kaki ke belakang. Isolasi glutes yang efektif.',sets:'3 set × 15 rep/kaki',rest:'45 detik',alat:'Cable Machine, Ankle Strap'},
+    ]
+  },
+  calf:{
+    name:'Betis — Gastrocnemius & Soleus',
+    func:'Betis terdiri dari gastrocnemius (terlihat dari luar) dan soleus (dalam). Berfungsi untuk plantarfleksi pergelangan kaki. Betis dikenal sebagai "otot yang keras dilatih" dan butuh volume tinggi.',
+    exercises:[
+      {name:'Standing Calf Raise',img:'⬆️',yt:'https://www.youtube.com/embed/gwLzBJYoWlI',desc:'Berdiri di edge step/platform, naik ke ujung kaki lalu turun perlahan. Melatih gastrocnemius secara maksimal.',sets:'4 set × 15-20 rep',rest:'60 detik',alat:'Calf Raise Machine / Step'},
+      {name:'Seated Calf Raise',img:'🪑',yt:'https://www.youtube.com/embed/JbyjNymZOt0',desc:'Duduk di mesin, beban di atas lutut. Menargetkan soleus lebih efektif karena lutut dalam posisi bengkok.',sets:'4 set × 20 rep',rest:'60 detik',alat:'Seated Calf Raise Machine'},
+      {name:'Donkey Calf Raise',img:'🫏',yt:'https://www.youtube.com/embed/YObPOcXZ-YA',desc:'Bungkuk, beban di punggung bawah. Memberikan range of motion yang lebih besar untuk gastrocnemius.',sets:'3 set × 15-20 rep',rest:'60 detik',alat:'Machine / Partner'},
+    ]
+  },
+  trap:{
+    name:'Trapezius — Upper, Middle & Lower Traps',
+    func:'Trapezius adalah otot berbentuk berlian besar di punggung atas. Berfungsi untuk elevasi (upper), retraksi (middle), dan depresi (lower) scapula. Traps yang besar memberikan tampilan "yoked".',
+    exercises:[
+      {name:'Barbell Shrug',img:'🤷',yt:'https://www.youtube.com/embed/g6qbq4Lf1FI',desc:'Berdiri dengan barbell, angkat bahu setinggi mungkin lalu turunkan. Latihan utama untuk upper traps.',sets:'4 set × 12-15 rep',rest:'60 detik',alat:'Barbell / Dumbbell'},
+      {name:'Deadlift',img:'🏋️',yt:'https://www.youtube.com/embed/op9kVnSso6Q',desc:'Angkat barbell dari lantai hingga berdiri tegak. Latihan terberat yang melatih hampir semua otot tubuh termasuk traps.',sets:'4 set × 5 rep',rest:'3 menit',alat:'Barbell'},
+      {name:'Face Pull',img:'🎯',yt:'https://www.youtube.com/embed/rep-qVOkqgk',desc:'Tarik cable ke arah wajah. Melatih middle dan lower traps serta deltoid posterior. Krusial untuk kesehatan bahu.',sets:'3 set × 15-20 rep',rest:'60 detik',alat:'Cable Machine, Rope'},
+    ]
+  }
+};
+
+// ===================== MUSCLE SELECTION =====================
+let activeMuscle=null;
+const svgColors={
+  default:'',
+  active:'rgba(0,212,200,0.35)'
+};
+
+function selectMuscle(id){
+  // Reset previous
+  document.querySelectorAll('.muscle-btn').forEach(b=>b.classList.remove('active'));
+  // Activate button
+  const btns=document.querySelectorAll('.muscle-btn');
+  btns.forEach(b=>{if(b.onclick&&b.onclick.toString().includes(`'${id}'`))b.classList.add('active');});
+  
+  activeMuscle=id;
+  const d=muscleData[id];
+  if(!d)return;
+  
+  const panel=document.getElementById('info-panel');
+  panel.innerHTML=`
+    <h3>${d.name}</h3>
+    <p class="muscle-func">${d.func}</p>
+    <p style="font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:0.75rem;font-family:'Orbitron',sans-serif;">⚡ LATIHAN REKOMENDASI</p>
+    <div class="exercise-list">
+      ${d.exercises.map((e,i)=>`<div class="exercise-item" onclick="openExercise(${JSON.stringify(e).replace(/"/g,'&quot;')})">
+        <span>${e.img} ${e.name}</span>
+        <span class="arrow">→</span>
+      </div>`).join('')}
+    </div>
+  `;
+}
+
+function openExercise(ex){
+  document.getElementById('modal-title').textContent=ex.name;
+  document.getElementById('modal-body').innerHTML=`
+    <div class="modal-img">${ex.img}</div>
+    <div class="modal-info">
+      <h4>📖 DESKRIPSI</h4>
+      <p>${ex.desc}</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin:1rem 0;">
+      <div class="modal-info" style="background:var(--bg2);padding:0.75rem;border-radius:8px;border:1px solid var(--border);">
+        <h4>📋 SETS & REPS</h4>
+        <p style="font-weight:700;color:var(--text);">${ex.sets}</p>
+      </div>
+      <div class="modal-info" style="background:var(--bg2);padding:0.75rem;border-radius:8px;border:1px solid var(--border);">
+        <h4>⏱️ REST</h4>
+        <p style="font-weight:700;color:var(--text);">${ex.rest}</p>
+      </div>
+      <div class="modal-info" style="background:var(--bg2);padding:0.75rem;border-radius:8px;border:1px solid var(--border);">
+        <h4>🛠️ ALAT</h4>
+        <p style="font-weight:700;color:var(--text);">${ex.alat}</p>
+      </div>
+    </div>
+    <div class="modal-info">
+      <h4>🎬 VIDEO TUTORIAL</h4>
+      <iframe class="yt-embed" src="${ex.yt}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  `;
+  document.getElementById('exercise-modal').classList.add('open');
+}
+
+function closeExerciseModal(){
+  document.getElementById('exercise-modal').classList.remove('open');
+  // Stop video
+  const iframe=document.querySelector('.yt-embed');
+  if(iframe)iframe.src=iframe.src;
+}
+function closeModal(e){if(e.target===document.getElementById('exercise-modal'))closeExerciseModal();}
+
+// ===================== NUTRITION CALCULATOR =====================
+function calculateNutrition(){
+  const gender=document.getElementById('gender').value;
+  const weight=parseFloat(document.getElementById('weight').value)||70;
+  const height=parseFloat(document.getElementById('height').value)||170;
+  const age=parseFloat(document.getElementById('age').value)||25;
+  const activity=parseFloat(document.getElementById('activity').value);
+  const goal=document.getElementById('goal').value;
+
+  // Mifflin-St Jeor BMR (akurat menurut ISSN & ACSM)
+  let bmr;
+  if(gender==='male'){
+    bmr=10*weight+6.25*height-5*age+5;
+  } else {
+    bmr=10*weight+6.25*height-5*age-161;
+  }
+  const tdee=bmr*activity;
+
+  // Goal adjustments (referensi: ISSN Position Stand, Precision Nutrition)
+  let calTarget,protMult,carbPct,fatPct,goalDesc;
+  switch(goal){
+    case 'bulking':
+      calTarget=tdee+300; // +300 kcal surplus (lean bulk)
+      protMult=1.8; // 1.6-2.2 g/kg (ISSN)
+      carbPct=0.45;fatPct=0.25;
+      goalDesc='<b>Lean Bulking:</b> Surplus kalori +300 kcal untuk memaksimalkan muscle gain dengan meminimalkan fat gain. Protein tinggi untuk sintesis otot. Sumber karbohidrat kompleks (oats, nasi merah, ubi) direkomendasikan. <br><br>🎯 <b>Target realistis:</b> Tambah 0.25–0.5 kg per minggu.';
+      break;
+    case 'dirty_bulking':
+      calTarget=tdee+700; // +700 kcal surplus
+      protMult=2.0;
+      carbPct=0.5;fatPct=0.2;
+      goalDesc='<b>Dirty Bulking:</b> Surplus besar +700 kcal untuk maksimalkan mass gain. Pertumbuhan otot lebih cepat tapi disertai peningkatan lemak tubuh. Cocok untuk ektomorf atau yang kesulitan makan banyak.<br><br>⚠️ <b>Perhatian:</b> Rencanakan cutting setelah 12-16 minggu untuk menghilangkan excess fat.';
+      break;
+    case 'cutting':
+      calTarget=tdee-400; // -400 kcal deficit (ISSN: max -500 untuk preserve muscle)
+      protMult=2.3; // Tinggi untuk preserve muscle saat deficit
+      carbPct=0.3;fatPct=0.25;
+      goalDesc='<b>Cutting:</b> Defisit -400 kcal untuk membakar lemak sambil mempertahankan muscle. Protein sangat tinggi (2.3g/kg) untuk anti-catabolik. Latihan beban tetap dilanjutkan untuk preserve mass.<br><br>🎯 <b>Target realistis:</b> Kurangi 0.5–1 kg lemak per minggu.';
+      break;
+    case 'diet':
+      calTarget=tdee-200; // Mild deficit
+      protMult=1.6;
+      carbPct=0.40;fatPct=0.30;
+      goalDesc='<b>Diet / Maintain:</b> Defisit ringan -200 kcal untuk penurunan berat bertahap dan sustainabel. Seimbang antara semua makronutrien. Cocok untuk pemula atau gaya hidup sehat jangka panjang.<br><br>🎯 <b>Target:</b> Turun 0.2–0.4 kg per minggu dengan sustainable.';
+      break;
+  }
+
+  const protein=Math.round(weight*protMult);
+  const fat=Math.round((calTarget*fatPct)/9);
+  const carb=Math.round((calTarget-(protein*4)-(fat*9))/4);
+  const fiber=Math.round(calTarget/1000*14); // 14g per 1000 kcal (WHO)
+  const sugar=Math.round(calTarget*0.05/4); // <5% total kcal (WHO)
+  const water=Math.round(weight*0.033*10)/10; // 33ml/kg
+
+  const ibw=gender==='male'?50+0.9*(height-152.4):45.5+0.9*(height-152.4);
+  const bmi=Math.round((weight/(height/100)**2)*10)/10;
+
+  document.getElementById('nutrition-results').style.display='block';
+  document.getElementById('results-grid').innerHTML=`
+    <div class="result-card"><div class="val">${Math.round(calTarget)}</div><div class="unit">kcal/hari</div><div class="label">KALORI TARGET</div></div>
+    <div class="result-card"><div class="val">${protein}g</div><div class="unit">${Math.round(protMult*10)/10}g/kg BW</div><div class="label">PROTEIN</div></div>
+    <div class="result-card"><div class="val">${carb}g</div><div class="unit">karbohidrat</div><div class="label">CARBS</div></div>
+    <div class="result-card"><div class="val">${fat}g</div><div class="unit">lemak</div><div class="label">FAT</div></div>
+    <div class="result-card"><div class="val">${fiber}g</div><div class="unit">serat</div><div class="label">FIBER</div></div>
+    <div class="result-card"><div class="val">&lt;${sugar}g</div><div class="unit">gula tambahan</div><div class="label">SUGAR MAX</div></div>
+    <div class="result-card"><div class="val">${water}L</div><div class="unit">per hari</div><div class="label">AIR PUTIH</div></div>
+    <div class="result-card"><div class="val">${Math.round(tdee)}</div><div class="unit">kcal/hari</div><div class="label">TDEE</div></div>
+    <div class="result-card"><div class="val">${bmi}</div><div class="unit">kg/m²</div><div class="label">BMI</div></div>
+  `;
+
+  // Progress bars (macro % of calories)
+  const totalCal=protein*4+carb*4+fat*9;
+  document.getElementById('progress-bars').innerHTML=`
+    <div class="prog-row"><div class="prog-label">Protein</div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${Math.round((protein*4/totalCal)*100)}%;"></div></div><div class="prog-val">${Math.round((protein*4/totalCal)*100)}%</div></div>
+    <div class="prog-row"><div class="prog-label">Carbs</div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${Math.round((carb*4/totalCal)*100)}%;background:linear-gradient(90deg,#0066ff,#00aaff);"></div></div><div class="prog-val">${Math.round((carb*4/totalCal)*100)}%</div></div>
+    <div class="prog-row"><div class="prog-label">Fat</div><div class="prog-bar-bg"><div class="prog-bar-fill" style="width:${Math.round((fat*9/totalCal)*100)}%;background:linear-gradient(90deg,#ff6600,#ffaa00);"></div></div><div class="prog-val">${Math.round((fat*9/totalCal)*100)}%</div></div>
+  `;
+
+  document.getElementById('goal-info').innerHTML=`
+    <h4>📊 PANDUAN TUJUANMU — ${goal.toUpperCase().replace('_',' ')}</h4>
+    <p>${goalDesc}</p>
+    <p style="margin-top:0.75rem;color:var(--text3);font-size:0.8rem;">⚠️ Referensi: ISSN Position Stand on Protein (2017), WHO Dietary Guidelines, NSCA Essentials of Strength & Conditioning. Nilai ini adalah estimasi — konsultasikan dengan ahli gizi untuk program personal.</p>
+  `;
+}
+
+// ===================== FOOD LOG =====================
+let foods=[];
+function addFood(){
+  const name=document.getElementById('food-name').value||'Makanan';
+  const cal=parseFloat(document.getElementById('food-cal').value)||0;
+  const prot=parseFloat(document.getElementById('food-prot').value)||0;
+  const carb=parseFloat(document.getElementById('food-carb').value)||0;
+  const fat=parseFloat(document.getElementById('food-fat').value)||0;
+  const fiber=parseFloat(document.getElementById('food-fiber').value)||0;
+  const id=Date.now();
+  foods.push({id,name,cal,prot,carb,fat,fiber});
+  renderFoodTable();
+  ['food-name','food-cal','food-prot','food-carb','food-fat','food-fiber'].forEach(i=>document.getElementById(i).value='');
+}
+function deleteFood(id){
+  foods=foods.filter(f=>f.id!==id);
+  renderFoodTable();
+}
+function renderFoodTable(){
+  const tbody=document.getElementById('food-tbody');
+  tbody.innerHTML=foods.map(f=>`<tr>
+    <td>${f.name}</td>
+    <td>${f.cal}</td>
+    <td>${f.prot}g</td>
+    <td>${f.carb}g</td>
+    <td>${f.fat}g</td>
+    <td>${f.fiber}g</td>
+    <td><button class="del-btn" onclick="deleteFood(${f.id})">🗑</button></td>
+  </tr>`).join('');
+  const totals={cal:0,prot:0,carb:0,fat:0,fiber:0};
+  foods.forEach(f=>{totals.cal+=f.cal;totals.prot+=f.prot;totals.carb+=f.carb;totals.fat+=f.fat;totals.fiber+=f.fiber;});
+  document.getElementById('food-totals').innerHTML=`<td>TOTAL</td><td>${Math.round(totals.cal)}</td><td>${Math.round(totals.prot*10)/10}g</td><td>${Math.round(totals.carb*10)/10}g</td><td>${Math.round(totals.fat*10)/10}g</td><td>${Math.round(totals.fiber*10)/10}g</td><td></td>`;
+}
+
+// ===================== NEWS DATA (with Google search query) =====================
+const newsData=[
+  {cat:'meta',icon:'🔥',title:'HIGH-FREQUENCY TRAINING 2025: PPL 6x Seminggu Comeback',body:'Push-Pull-Legs 6x per minggu kembali menjadi META utama natural lifters. Didukung riset terbaru tentang frekuensi stimulus otot optimal.',date:'May 2026',tag:'TRENDING',query:'High Frequency Training PPL 6x week natural lifter 2025 research'},
+  {cat:'meta',icon:'⚡',title:'DROP SET & GIANT SET: Teknik Intensity Terpanas 2026',body:'Drop set terbukti efektif untuk hypertrophy intensitas tinggi. Giant set untuk efisiensi waktu. Kedua teknik ini kembali dominan di komunitas gym global.',date:'Apr 2026',tag:'TIPS',query:'drop set giant set hypertrophy technique gym 2025 2026'},
+  {cat:'suplemen',icon:'🧪',title:'Creatine Monohydrate: Riset Terbaru ISSN 2025',body:'ISSN menegaskan creatine monohydrate adalah suplemen paling evidence-based. Meningkatkan kekuatan hingga 15% dan lean mass tanpa efek samping signifikan.',date:'Apr 2026',tag:'RISET',query:'creatine monohydrate ISSN position stand 2025 research strength'},
+  {cat:'suplemen',icon:'💊',title:'Whey vs Casein: Timing Optimal Protein Intake',body:'Whey protein paling efektif 30 menit post-workout karena absorpsi cepat. Casein sebelum tidur untuk muscle protein synthesis sepanjang malam.',date:'Apr 2026',tag:'EDUKASI',query:'whey casein protein timing post workout research 2025'},
+  {cat:'suplemen',icon:'🔬',title:'Beta-Alanine & Pre-Workout: Manfaat Nyata atau Hype?',body:'Beta-alanine terbukti meningkatkan endurance anaerob 8-12%. Dosis efektif 3.2g/hari. Tingling yang terasa adalah paresthesia normal dan tidak berbahaya.',date:'Mar 2026',tag:'RISET',query:'beta alanine pre workout benefits research 2025 evidence'},
+  {cat:'berita',icon:'🏆',title:'Arnold Classic Asia 2026: Hasil & Highlight',body:'Kompetisi bodybuilding terbesar di Asia kembali digelar. Atlet Indonesia meraih podium di kategori Classic Physique.',date:'Mar 2026',tag:'EVENT',query:'Arnold Classic Asia 2026 bodybuilding results Indonesia'},
+  {cat:'berita',icon:'🌏',title:'Gym Chain Premium Ekspansi Besar di Indonesia 2026',body:'Beberapa jaringan gym premium memperluas jangkauan ke lebih banyak kota di Indonesia dengan peralatan modern dan konsep boutique gym.',date:'Mar 2026',tag:'NEWS',query:'premium gym expansion Indonesia 2026 new branches'},
+  {cat:'promo',icon:'💥',title:'Harbolnas & Sale Suplemen: Promo Terbaik Bulan Ini',body:'Berbagai platform e-commerce mengadakan flash sale suplemen gym. Pantau Tokopedia, Shopee, dan toko resmi brand untuk promo terkini.',date:'May 2026',tag:'PROMO',query:'promo suplemen gym Indonesia Tokopedia Shopee 2026 diskon'},
+  {cat:'promo',icon:'🛒',title:'Brand Lokal Suplemen Indonesia: Kualitas vs Harga',body:'Evolene, Scitec, dan brand lokal lainnya semakin bersaing dengan brand internasional dalam kualitas. Value for money terbaik untuk gym-goers Indonesia.',date:'Apr 2026',tag:'REVIEW',query:'suplemen gym lokal Indonesia terbaik 2025 2026 review Evolene'},
+];
+
+let activeFilter='all';
+function filterNews(cat,btn){
+  activeFilter=cat;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderNews();
+}
+
+function buildGoogleUrl(query){
+  return 'https://www.google.com/search?q='+encodeURIComponent(query)+'&hl=id';
+}
+
+function renderNews(){
+  const grid=document.getElementById('news-grid');
+  const filtered=activeFilter==='all'?newsData:newsData.filter(n=>n.cat===activeFilter);
+  grid.innerHTML=filtered.map(n=>`
+    <div class="news-card" onclick="window.open('${buildGoogleUrl(n.query)}','_blank')" style="cursor:pointer;">
+      <div class="news-img">${n.icon}</div>
+      <div class="news-body">
+        <div class="news-category">${n.cat.toUpperCase()}</div>
+        <h3>${n.title}</h3>
+        <p>${n.body}</p>
+      </div>
+      <div class="news-meta">
+        <span class="news-date">📅 ${n.date}</span>
+        <span class="news-tag">${n.tag}</span>
+      </div>
+      <div class="news-go-btn">🔍 Verifikasi di Google →</div>
+      <div class="news-ai-badge">🤖 Klik untuk cek berita terbaru & terpercaya</div>
+    </div>
+  `).join('');
+}
+
+// ===================== SUPPLEMENT DATA =====================
+const suplemenData=[
+  {
+    id:'cbum',
+    type:'whey',
+    brand:'CBUM × Raw Nutrition',
+    name:'CBUM Itholate Whey Protein',
+    emoji:'🏆',
+    price:'Rp 900.000 – Rp 1.400.000',
+    flavor:'Chocolate',
+    serving:'60 Serving (Scoop)',
+    rating:8.5,
+    review:'Rasanya sangat unik — ada manis yang sangat subtle, diikuti rasa dark chocolate yang khas, lalu finish dengan sedikit rasa asam yang mengejutkan. Agak aneh di awal, tapi masih sangat consumable. Mungkin bukan yang paling "mainstream enak", tapi punya karakter rasa tersendiri yang memorable. Kualitas protein-nya sendiri premium banget sesuai harga.',
+    pros:['Kualitas protein premium','Karakter rasa unik & memorable','Endorsed Chris Bumstead','60 serving value for money','Mixes well, no clumping'],
+    cons:['Harga relatif mahal','Rasa agak terlalu "dark" bagi sebagian orang','Sedikit sour aftertaste'],
+    flavors:['🍫 Chocolate'],
+    category:'whey'
+  },
+  {
+    id:'evolene',
+    type:'whey',
+    brand:'Evolene Indonesia',
+    name:'Evolene Whey Protein',
+    emoji:'🇮🇩',
+    price:'Rp 500.000 – Rp 650.000',
+    flavor:'Chocolate',
+    serving:'60 Serving (Sachet)',
+    rating:8.7,
+    review:'Jauh lebih enak dari CBUM dalam segi mainstream taste. Rasanya coklat susu yang familiar dan smooth. Namun secara personal terasa terlalu manis untuk kelas whey protein — lebih terasa seperti minuman coklat premium daripada suplemen. Tapi ini justru jadi kelebihan bagi banyak orang! Untuk harga lokal, kualitas dan branding-nya sangat outstanding.',
+    pros:['Rasa enak, mainstream-friendly','Harga sangat terjangkau (lokal)','Branding & packaging keren','Format sachet praktis','Kualitas baik untuk harga segini'],
+    cons:['Rasa agak terlalu manis','Kadang agak berbuih saat di-shake','Belum sekelas whey international premium'],
+    flavors:['🍫 Chocolate'],
+    category:'whey'
+  },
+  {
+    id:'crevolene',
+    type:'creatine',
+    brand:'Evolene Indonesia',
+    name:'Crevolene Creatine',
+    emoji:'🍇',
+    price:'Rp 210.000',
+    flavor:'Mangga, Anggur & Unflavored',
+    serving:'60 Serving (Scoop)',
+    rating:8.3,
+    review:'Sangat unik di pasar — creatine dengan rasa buah-buahan adalah sesuatu yang jarang sekali ada di level internasional. Rasa mangga dan anggurnya sesuai dengan standar creatine, tidak berlebihan. Yang paling impressive? Zero kalori tambahan, hanya 2-3gr gula natural. Evolene sangat kreatif di sini. Rasa unflavored-nya standar creatine pada umumnya.',
+    pros:['Rasa buah unik di pasaran','Zero kalori tambahan','Harga sangat terjangkau','3 pilihan rasa (mangga, anggur, unflavored)','Brand lokal yang inovatif'],
+    cons:['Efek creatine sedikit lebih lambat terasa','Rasa buah kurang intens','Masih kalah speed absorption vs ON Creatine'],
+    flavors:['🥭 Mangga','🍇 Anggur','⚪ Unflavored'],
+    category:'creatine'
+  },
+  {
+    id:'on-creatine',
+    type:'creatine',
+    brand:'Optimum Nutrition',
+    name:'ON Micronized Creatine',
+    emoji:'💎',
+    price:'Rp 290.000',
+    flavor:'Raspberry',
+    serving:'60 Serving (Scoop manual)',
+    rating:8.8,
+    review:'Rasanya enak banget — benar-benar seperti minum Mizone raspberry, sangat refreshing dan enjoyable. Impact-nya ke tubuh terasa lebih cepat dibanding Crevolene, mungkin karena micronized formula-nya. Packaging-nya cantik banget, kotak yang elegan dan premium. Satu kekurangan kecil: tidak include scoop sendiri, jadi harus pakai sendok ukur 5gr manual — minor tapi perlu diketahui.',
+    pros:['Rasa seperti Mizone raspberry (enak!!)','Impact cepat terasa','Packaging premium & cantik','Brand internasional terpercaya','Micronized untuk absorpsi lebih baik'],
+    cons:['Tidak include scoop/sendok','Harga lebih mahal dari Crevolene','Hanya 1 varian rasa'],
+    flavors:['🍓 Raspberry'],
+    category:'creatine'
+  }
+];
+
+let activeSuplFilter='all';
+function filterSuplemen(cat,btn){
+  activeSuplFilter=cat;
+  document.querySelectorAll('.suplemen-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSuplemen();
+}
+
+function getRatingStars(r){
+  const full=Math.floor(r/2);
+  const half=r%2>=0.5?1:0;
+  const empty=5-full-half;
+  return '★'.repeat(full)+(half?'½':'')+'☆'.repeat(empty);
+}
+
+function renderSuplemen(){
+  const grid=document.getElementById('suplemen-grid');
+  const filtered=activeSuplFilter==='all'?suplemenData:suplemenData.filter(s=>s.category===activeSuplFilter);
+  grid.innerHTML=filtered.map(s=>`
+    <div class="suplemen-card">
+      <div class="suplemen-card-header">
+        <div class="suplemen-brand">${s.brand}</div>
+        <div class="suplemen-name">${s.name}</div>
+        <span class="suplemen-type-badge">${s.type==='whey'?'🥛 WHEY PROTEIN':'⚡ CREATINE'}</span>
+        <div class="suplemen-emoji">${s.emoji}</div>
+      </div>
+      <div class="suplemen-body">
+        <div class="suplemen-stats">
+          <div class="stat-item">
+            <div class="stat-label">Harga</div>
+            <div class="stat-value" style="font-size:0.78rem;">${s.price}</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-label">Serving</div>
+            <div class="stat-value" style="font-size:0.78rem;">${s.serving}</div>
+          </div>
+        </div>
+        <div class="suplemen-flavors">
+          ${s.flavors.map(f=>`<span class="flavor-tag">${f}</span>`).join('')}
+        </div>
+        <p class="suplemen-review">"${s.review}"</p>
+        <div class="pros-cons">
+          <div class="pros"><h5>✅ Pros</h5><ul>${s.pros.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+          <div class="cons"><h5>❌ Cons</h5><ul>${s.cons.map(c=>`<li>${c}</li>`).join('')}</ul></div>
+        </div>
+        <div class="suplemen-rating">
+          <div>
+            <div class="rating-label">RATING</div>
+            <div class="rating-value">${s.rating}/10</div>
+            <div class="rating-stars">${getRatingStars(s.rating)}</div>
+          </div>
+          <div class="rating-bar">
+            <div class="rating-fill" style="width:${s.rating*10}%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// INIT
+renderNews();
+renderSuplemen();
+</script>
+</body>
+</html>
